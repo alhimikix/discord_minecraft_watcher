@@ -1,0 +1,6 @@
+services:
+  bot:
+    build:
+      context: .
+    volumes:
+      - .env-bot:/app/.env

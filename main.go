@@ -17,9 +17,9 @@ func main() {
 	if err != nil {
 		log.Fatal("Error loading .env file")
 	}
-	discordToken := os.Getenv("DISCORD_TOKEN")                            //"MTEyOTY2ODc4MTk2MzIzNTMyOA.GWPYJM.Hr402kKsciqQo27_NpZtaEXPTKAKVOyuFXcrC0" //"RYtbDdzl_-XViFyBahY1Ni6iVA9CqQvS" //flag.Bool("color", false, "display colorized output")
-	minecraftServerHost := os.Getenv("MINECRAFT_HOST")                    //"141.101.24.182"
-	minecraftServerPort, err := strconv.Atoi(os.Getenv("MINECRAFT_PORT")) //25765
+	discordToken := os.Getenv("DISCORD_TOKEN")
+	minecraftServerHost := os.Getenv("MINECRAFT_HOST")
+	minecraftServerPort, err := strconv.Atoi(os.Getenv("MINECRAFT_PORT"))
 	if err != nil {
 		panic(err)
 	}

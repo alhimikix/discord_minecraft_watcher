@@ -56,6 +56,8 @@ func main() {
 				}
 				countFails++
 				continue
+			} else {
+				countFails = 0
 			}
 			err = discord.UpdateGameStatus(123, fmt.Sprintf("Игроков: %d/%d", data.OnlinePlayers, data.MaxPlayers))
 			if err != nil {

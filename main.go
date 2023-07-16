@@ -39,12 +39,22 @@ func main() {
 		log.Fatalf("Cannot open the session: %v", err)
 	}
 	defer discord.Close()
-
+	countFails := 0
 	go func() {
 		for {
+			time.Sleep(2 * time.Second)
+
 			data, err := pinger.PingBeta18(minecraftServerHost, minecraftServerPort)
 			if err != nil {
 				log.Printf("Error querying server: %v", err)
+				if countFails > 30 {
+					err = discord.UpdateGameStatus(123, fmt.Sprintf("Offline"))
+					if err != nil {
+						log.Printf("Error updating game status Err: %s", err)
+					}
+					continue
+				}
+				countFails++
 				continue
 			}
 			err = discord.UpdateGameStatus(123, fmt.Sprintf("Игроков: %d/%d", data.OnlinePlayers, data.MaxPlayers))
@@ -52,7 +62,6 @@ func main() {
 				log.Printf("Error updating game status Err: %s", err)
 			}
 
-			time.Sleep(10 * time.Second)
 		}
 	}()
 
